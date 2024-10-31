@@ -14,17 +14,10 @@
             <input 
                 type="text" 
                 id="cityInput" 
-                placeholder="Enter city name" 
+                placeholder="Enter city, country (e.g., London, United Kingdom)" 
                 required
                 autocomplete="on"
-                aria-label="City name">
-            <input 
-                type="text" 
-                id="countryInput" 
-                placeholder="Country code (e.g., US, GB)" 
-                maxlength="2"
-                pattern="[A-Za-z]{2}"
-                aria-label="Country code">
+                aria-label="City name and country">
             <button type="submit">Get Weather</button>
         </form>
         <div id="weatherResult" role="region" aria-live="polite">

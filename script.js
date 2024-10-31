@@ -1,7 +1,31 @@
+// Add country name to code mapping
+const countryNameToCode = {
+    'afghanistan': 'AF', 'albania': 'AL', 'algeria': 'DZ', 'argentina': 'AR', 'australia': 'AU', 
+    'austria': 'AT', 'belgium': 'BE', 'brazil': 'BR', 'canada': 'CA', 'china': 'CN', 
+    'denmark': 'DK', 'egypt': 'EG', 'france': 'FR', 'germany': 'DE', 'greece': 'GR', 
+    'india': 'IN', 'indonesia': 'ID', 'italy': 'IT', 'japan': 'JP', 'mexico': 'MX', 
+    'netherlands': 'NL', 'new zealand': 'NZ', 'norway': 'NO', 'poland': 'PL', 'portugal': 'PT', 
+    'russia': 'RU', 'spain': 'ES', 'sweden': 'SE', 'switzerland': 'CH', 'thailand': 'TH', 
+    'turkey': 'TR', 'united kingdom': 'GB', 'uk': 'GB', 'united states': 'US', 'usa': 'US'
+};
+
 document.getElementById("weatherForm").addEventListener("submit", function(event) {
     event.preventDefault();
-    const city = document.getElementById("cityInput").value;
-    const country = document.getElementById("countryInput").value;
+    const cityCountry = document.getElementById("cityInput").value;
+    let [city, country] = cityCountry.split(',').map(str => str.trim());
+    
+    // If country is provided, try to convert it to country code
+    if (country) {
+        const countryLower = country.toLowerCase();
+        // Check if it's already a 2-letter code
+        if (country.length === 2) {
+            country = country.toUpperCase();
+        } else {
+            // Try to find the country code from the full name
+            country = countryNameToCode[countryLower];
+        }
+    }
+    
     getWeather(city, country);
 });
 
